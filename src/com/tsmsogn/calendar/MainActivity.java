@@ -35,29 +35,22 @@ public class MainActivity extends Activity {
             Pattern pattern = Pattern.compile("^(\\d{4})(\\d{2})$");
             Matcher matcher = pattern.matcher(String.valueOf(current));
 
-            int year, month;
-
-            if (matcher.find()) {
-                year = Integer.parseInt(matcher.group(1));
-                month = Integer.parseInt(matcher.group(2));
-            } else {
-                year = 2014;
-                month = 2;
-            }
+            int year = Integer.parseInt(matcher.group(1));
+            int month = Integer.parseInt(matcher.group(2));
 
             View view = getLayoutInflater().inflate(R.layout.view_photo_pager,
                     null);
 
             GridView calendarView = (GridView) view.findViewById(R.id.calendar);
             TextView textView1 = (TextView) view.findViewById(R.id.textView1);
-            
+
             // Initialised
             GridCellAdapter adapter = new GridCellAdapter(
                     getApplicationContext(), R.id.calendar_day_gridcell, month,
                     year);
             adapter.notifyDataSetChanged();
             calendarView.setAdapter(adapter);
-            
+
             textView1.setText(String.valueOf(current));
 
             container.addView(view);
